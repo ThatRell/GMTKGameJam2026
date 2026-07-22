@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://xdg38mkfcvhg"]
+
+[ext_resource type="Script" uid="uid://d0ep5ad4empgg" path="res://ui/game_ui.gd" id="1_dcmab"]
+[ext_resource type="PackedScene" uid="uid://bi0vc0ymjcfsp" path="res://ui/hud/display_clock.tscn" id="2_w46tp"]
+
+[node name="GameUI" type="CanvasLayer" unique_id=1822230257 node_paths=PackedStringArray("hud", "pause_menu", "debug_menu")]
+visible = false
+script = ExtResource("1_dcmab")
+hud = NodePath("HUD")
+pause_menu = NodePath("PauseMenu")
+debug_menu = NodePath("DebugMenu")
+
+[node name="HUD" type="Control" parent="." unique_id=208000243]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DisplayClock" parent="HUD" unique_id=1624328689 instance=ExtResource("2_w46tp")]
+layout_mode = 1
+
+[node name="PauseMenu" type="Control" parent="." unique_id=2079826007]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugMenu" type="Control" parent="." unique_id=632191979]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
