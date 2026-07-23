@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dwhas3i4omaok"]
+
+[ext_resource type="Texture2D" uid="uid://d3l5d5h431yp1" path="res://icon.svg" id="1_3nepp"]
+[ext_resource type="Script" uid="uid://dk8yb5mxwrve6" path="res://components/attack_manager.gd" id="1_305ex"]
+
+[node name="AttackManager" type="Node2D" unique_id=1484579424]
+script = ExtResource("1_305ex")
+
+[node name="RotationOffset" type="Node2D" parent="." unique_id=1329621498]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationOffset" unique_id=1277624514]
+scale = Vector2(0.25, 0.05)
+texture = ExtResource("1_3nepp")
+
+[node name="ShootPosition" type="Marker2D" parent="RotationOffset/Sprite2D" unique_id=2087508443]
+unique_name_in_owner = true
+position = Vector2(60, 0)
+gizmo_extents = 729.3
+
+[node name="ShotTimer" type="Timer" parent="." unique_id=381992575]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

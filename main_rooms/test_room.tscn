@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://d2f6ud5xxium0"]
 
+[ext_resource type="PackedScene" uid="uid://bcxsg4tkn63fb" path="res://objects/camera/smooth_camera.tscn" id="1_1ln4m"]
 [ext_resource type="PackedScene" uid="uid://bodnisfjhbsp7" path="res://player/player.tscn" id="1_fbjtn"]
+[ext_resource type="PackedScene" uid="uid://kr6mqujx286q" path="res://components/player_bullet_pool.tscn" id="3_7gyj7"]
+[ext_resource type="PackedScene" uid="uid://1mvowum0j5e1" path="res://components/enemy_bullet_pool.tscn" id="4_wami1"]
 
 [node name="TestRoom" type="Node2D" unique_id=203962754]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2135204872]
+[node name="SmoothCamera" parent="." unique_id=469740578 instance=ExtResource("1_1ln4m")]
 
 [node name="Player" parent="." unique_id=832450570 instance=ExtResource("1_fbjtn")]
+
+[node name="PlayerBulletPool" parent="." unique_id=1262682872 instance=ExtResource("3_7gyj7")]
+
+[node name="EnemyBulletPool" parent="." unique_id=2081719712 instance=ExtResource("4_wami1")]

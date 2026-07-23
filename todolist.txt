@@ -1,0 +1,34 @@
+day 1:
+	- basic shooting where the mouse is (enter the gungeon style) (DONE)
+	- right click fast forward dodge:
+		- tps u where u would be walking (DONE)
+		- decreases clock time (DONE)
+		- decreases any cooldown/auto attack cd
+		- auto attacking and then pressing dodge will insta cast auto attack
+	- time recall (R):
+		- go back to where u were and go back to the hp u had 5 seconds ago and :
+			- basically have a queue that pushes and pops every 0.25 seconds (should be size 20)
+			- queue will contain player position and hp
+			- upon pressing R, u go to the hp and position at the end of the queue (back)
+		- has a 15 second cooldown
+		- increases clock time by 5 seconds (good)
+		- check if any cooldowns have <= 5 when doing cooldownTime - currentTime:
+			if so then get rid of the cooldowns
+
+day 2:
+	- enemies:
+		- horde type enemy that can easily be killed
+		- normal type enemy that just shoots basic projectiles
+		- different enemy that shoots morgana q's:
+			- u can recall in order to get out
+			- when player is hit, wait for like 0.2ms to detect if player uses time dodge (game feel)
+	
+	- boss fight
+	- time stop (Q):
+		- enemies inside or that enter that radius will be frozen (can't move or attack)
+		- projectiles (both enemies' and yours) that are inside or that enter that radius will be frozen
+		- after time bubble ends, everything moves again
+
+day 3:
+
+day 4:

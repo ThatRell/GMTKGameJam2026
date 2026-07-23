@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://1mvowum0j5e1"]
+
+[ext_resource type="Script" uid="uid://cin48n245hlp" path="res://components/enemy_bullet_pool.gd" id="1_3admf"]
+
+[node name="EnemyBulletPool" type="Node2D" unique_id=2081719712]
+script = ExtResource("1_3admf")

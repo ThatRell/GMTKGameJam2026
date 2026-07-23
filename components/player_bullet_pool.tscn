@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://kr6mqujx286q"]
+
+[ext_resource type="Script" uid="uid://botnxevw7vu3w" path="res://components/player_bullet_pool.gd" id="1_kr3hq"]
+
+[node name="PlayerBulletPool" type="Node2D" unique_id=1262682872]
+script = ExtResource("1_kr3hq")

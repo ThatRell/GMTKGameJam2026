@@ -2,14 +2,34 @@ extends Node
 
 signal updated
 
-var a: int = 24
-var b: int = 24
-var c: int = 24
+var a: int = 1
+var b: int = 1
+var c: int = 1
 
 var clock_mode := Utility.ClockMode.HMS
 var is_paused: bool = true
 
 var _accumulator: float = 0.0
+
+
+func set_clock(slot_a: int, slot_b: int, slot_c: int) -> void:
+	a = slot_a
+	b = slot_b
+	c = slot_c
+	clamp_clock()
+	
+	_accumulator = 0.0
+	updated.emit()
+
+
+func clamp_clock() -> void:
+	a = max(a, 0)
+	b = clampi(b, 0, 59)
+	
+	if clock_mode == Utility.ClockMode.HMS:
+		c = clampi(c, 0, 59)
+	else:
+		c = clampi(c, 0, 999)
 
 
 func toggle_clock_mode() -> void:
@@ -36,41 +56,98 @@ func _process(delta: float) -> void:
 		Utility.ClockMode.HMS:
 			while _accumulator >= 1.0:
 				_accumulator -= 1.0
-				_decrement_time()
-				updated.emit()
+				subtract_from_slot(Utility.TimeSlot.C, 1)
 		
 		Utility.ClockMode.MSM:
 			while _accumulator >= 0.001:
 				_accumulator -= 0.001
-				_decrement_time()
-				updated.emit()
-
-
-func _decrement_time() -> void:
+				subtract_from_slot(Utility.TimeSlot.C, 1)
+	
 	if a == 0 and b == 0 and c == 0:
 		on_clock_finish()
+
+
+# decreasing time for a slot
+func subtract_from_slot(slot: int, amount: int) -> void:
+	if amount < 0:
 		return
 	
-	c -= 1
+	match slot:
+		Utility.TimeSlot.A:
+			a = max(a - amount, 0)
+		
+		Utility.TimeSlot.B:
+			while amount > 0:
+				if b >= amount:
+					b -= amount
+					amount = 0
+				else:
+					amount -= b
+					b = 0
+					if amount > 0:
+						if a > 0:
+							a -= 1
+							b = 59
+							amount -= 1
+						else:
+							break
+		
+		Utility.TimeSlot.C:
+			var max_c = 59 if clock_mode == Utility.ClockMode.HMS else 999
+			while amount > 0:
+				if c >= amount:
+					c -= amount
+					amount = 0
+				else:
+					amount -= c
+					c = 0
+					if amount > 0:
+						if b > 0:
+							b -= 1
+							c = max_c
+							amount -= 1
+						elif a > 0:
+							a -= 1
+							b = 59
+							c = max_c
+							amount -= 1
+						else:
+							break
 	
-	if c < 0:
-		if clock_mode == Utility.ClockMode.HMS:
-			c = 59
-		else:
-			c = 999
-		b -= 1
-	
-	if b < 0:
-		b = 59
-		a -= 1
-	
-	if a < 0:
-		a = 0
-		b = 0
-		c = 0
+	updated.emit()
 
 
-# add decreasing for a specfiic slot
+# adding time to a slot
+func add_to_slot(slot: int, amount: int) -> void:
+	if amount < 0:
+		return
+	
+	match slot:
+		Utility.TimeSlot.A:
+			a += amount
+		Utility.TimeSlot.B:
+			b += amount
+			check_b_overflow()
+		Utility.TimeSlot.C:
+			var b_units: int
+			if clock_mode == Utility.ClockMode.HMS:
+				b_units = (c + amount) / 60
+				b += b_units
+				check_b_overflow()
+				c = (c + amount) % 60
+			else:
+				b_units = (c + amount) / 1000
+				b += b_units
+				check_b_overflow()
+				c = (c + amount) % 1000
+	
+	updated.emit()
+
+
+func check_b_overflow() -> void:
+	var a_units: int = b / 60
+	a += a_units
+	b %= 60
 
 
 func on_clock_finish() -> void:
@@ -78,7 +155,7 @@ func on_clock_finish() -> void:
 	is_paused = true
 	# death animation or something here
 	# await
-	#SceneChanger.gameover screen
+	# outer wilds reset
 
 
 func get_display_string() -> String:

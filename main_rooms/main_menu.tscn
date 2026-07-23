@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://pxed7d8fqi64"]
+
+[ext_resource type="Script" uid="uid://yvdcj6ylhb5p" path="res://main_rooms/main_menu.gd" id="1_yi1kh"]
+
+[node name="MainMenu" type="Node2D" unique_id=371475454]
+script = ExtResource("1_yi1kh")
+initial_scene = &"TestRoom"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1722611418]
+
+[node name="PlayButton" type="Button" parent="CanvasLayer" unique_id=1072927255]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
