@@ -3,16 +3,23 @@ day 1:
 	- right click fast forward dodge:
 		- tps u where u would be walking (DONE)
 		- decreases clock time (DONE)
-		- decreases any cooldown/auto attack cd
-		- auto attacking and then pressing dodge will insta cast auto attack
+		- auto attack reset (DONE)
+		- auto attacking and then pressing dodge will insta cast auto attack (auto windup cancel) (DONE)
+		- decreases any cooldowns
 	- time recall (R):
-		- go back to where u were and go back to the hp u had 5 seconds ago and :
-			- basically have a queue that pushes and pops every 0.25 seconds (should be size 20)
-			- queue will contain player position and hp
-			- upon pressing R, u go to the hp and position at the end of the queue (back)
-		- has a 15 second cooldown
-		- increases clock time by 5 seconds (good)
+		- go back to where u were and go back to the hp u had 5 seconds ago:
+			- basically have a queue that push_back() every 0.33 seconds (should be size 15) (DONE)
+			- if greater than size 15 after push, pop_front() (DONE)
+			- queue will contain player position and hp (DONE)
+			- upon pressing R, u go to the hp and position at the end of the queue (DONE)
+		- has a 15 second cooldown (DONE)
+		- increases clock time by 5 seconds (DONE)
 		- check if any cooldowns have <= 5 when doing cooldownTime - currentTime:
+			if so then get rid of the cooldowns
+	
+	remaining tasks:
+		- for dodge: decreases any cooldowns
+		- for recall: check if any cooldowns have <= 5 when doing cooldownTime - currentTime:
 			if so then get rid of the cooldowns
 
 day 2:
@@ -23,12 +30,24 @@ day 2:
 			- u can recall in order to get out
 			- when player is hit, wait for like 0.2ms to detect if player uses time dodge (game feel)
 	
-	- boss fight
+	- boss fight?
 	- time stop (Q):
 		- enemies inside or that enter that radius will be frozen (can't move or attack)
 		- projectiles (both enemies' and yours) that are inside or that enter that radius will be frozen
 		- after time bubble ends, everything moves again
+	
+	- UIs for cooldowns (auto attack, dash, recall, etc.)
 
 day 3:
+	- room setup
+	- puzzles
+	- art
+	- tilemaps
+	- sound
 
 day 4:
+	- polish
+	- bug fix
+	- playtest
+	- submit early build
+	- pray

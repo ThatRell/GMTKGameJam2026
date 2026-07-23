@@ -9,10 +9,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yi1kh"]
 size = Vector2(15, 10)
 
-[node name="Player" type="CharacterBody2D" unique_id=832450570 node_paths=PackedStringArray("health_component") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=832450570 node_paths=PackedStringArray("health_component", "attack_manager") groups=["player"]]
 collision_mask = 48
 script = ExtResource("1_rkbax")
 health_component = NodePath("HealthComponent")
+attack_manager = NodePath("AttackManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1180234751]
 scale = Vector2(0.2, 0.2)
@@ -33,7 +34,3 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_yi1kh")
 
 [node name="AttackManager" parent="." unique_id=1484579424 instance=ExtResource("5_qjkh3")]
-
-[node name="DashCooldown" type="Timer" parent="." unique_id=281715418]
-
-[node name="RecallCooldown" type="Timer" parent="." unique_id=915136925]

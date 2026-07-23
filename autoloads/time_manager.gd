@@ -2,9 +2,9 @@ extends Node
 
 signal updated
 
-var a: int = 1
-var b: int = 1
-var c: int = 1
+var a: int = 24
+var b: int = 24
+var c: int = 24
 
 var clock_mode := Utility.ClockMode.HMS
 var is_paused: bool = true

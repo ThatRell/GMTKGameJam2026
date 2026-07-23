@@ -16,10 +16,3 @@ texture = ExtResource("1_3nepp")
 [node name="ShootPosition" type="Marker2D" parent="RotationOffset/Sprite2D" unique_id=2087508443]
 unique_name_in_owner = true
 position = Vector2(60, 0)
-gizmo_extents = 729.3
-
-[node name="ShotTimer" type="Timer" parent="." unique_id=381992575]
-unique_name_in_owner = true
-one_shot = true
-
-[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

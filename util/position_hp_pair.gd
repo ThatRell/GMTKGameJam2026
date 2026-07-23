@@ -1,4 +1,5 @@
 class_name PositionHPInfo
+extends RefCounted
 
 var position: Vector2
 var health: float
