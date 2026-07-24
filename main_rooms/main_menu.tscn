@@ -4,7 +4,7 @@
 
 [node name="MainMenu" type="Node2D" unique_id=371475454]
 script = ExtResource("1_yi1kh")
-initial_scene = &"TestRoom"
+initial_scene = &"Outside"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1722611418]
 

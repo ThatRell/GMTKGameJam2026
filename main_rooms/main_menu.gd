@@ -10,4 +10,5 @@ func _ready() -> void:
 	
 
 func _on_button_pressed() -> void:
+	SceneLoader.entry_point = "Spawn"
 	SceneLoader.load_scene(initial_scene)

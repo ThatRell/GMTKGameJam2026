@@ -23,31 +23,47 @@ day 1:
 			if so then get rid of the cooldowns
 
 day 2:
+	- enemy logic:
+		- enemy will idle if not in range of player <- default state (DONE)
+		- follow state: keep chasing the player until in attack range (DONE)
+		- attack state: enemy will shoot at player and move in a random direction
+		 as long as within a certain range of the player (DONE)
 	- enemies:
-		- horde type enemy that can easily be killed
+		- horde type enemy that can easily be killed (just runs at you and doesn't shoot)
 		- normal type enemy that just shoots basic projectiles
 		- different enemy that shoots morgana q's:
+			- attack class or something that'll give u stun info
 			- u can recall in order to get out
-			- when player is hit, wait for like 0.2ms to detect if player uses time dodge (game feel)
+			- when player is hit, wait for like 0.2ms to detect if player uses time dodge (game feel)  (DONE)
 	
-	- boss fight?
 	- time stop (Q):
-		- enemies inside or that enter that radius will be frozen (can't move or attack)
-		- projectiles (both enemies' and yours) that are inside or that enter that radius will be frozen
-		- after time bubble ends, everything moves again
+		- enemies inside or that enter time stop radius will be frozen (can't move or attack) (DONE)
+		- projectiles (both enemies' and yours) that are inside or that enter the radius will be frozen (DONE)
+		- after time bubble ends, everything moves again (DONE)
+		- pause timemanger if player is in time bubble (not super important yet)
+	
+	- fail states
+	- room setup
+	- tilemap setup
+	- gameloop
 	
 	- UIs for cooldowns (auto attack, dash, recall, etc.)
 
 day 3:
-	- room setup
+	- more rooms
 	- puzzles
-	- art
-	- tilemaps
+	- spell cycling
+	- art (player sprites, enemy sprites)
 	- sound
 
 day 4:
+	- splash art
+	- title art
 	- polish
 	- bug fix
 	- playtest
 	- submit early build
 	- pray
+
+important bugs:
+	- clock is counting down faster than a normal clock

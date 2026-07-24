@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GMTKGameJam2026"
-run/main_scene="uid://d2f6ud5xxium0"
+run/main_scene="uid://pxed7d8fqi64"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,7 @@ GameUi="*uid://xdg38mkfcvhg"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/canvas_textures/default_texture_filter=1
 
 [global_group]
 
@@ -103,12 +104,14 @@ recall={
 
 [layer_names]
 
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Player Attacks"
-2d_physics/layer_3="Enemy"
-2d_physics/layer_4="Enemy Attacks"
-2d_physics/layer_5="Objects"
-2d_physics/layer_6="Terrain"
+2d_physics/layer_1="PlayerBody"
+2d_physics/layer_2="PlayerHitbox"
+2d_physics/layer_3="PlayerAttacks"
+2d_physics/layer_4="EnemyBody"
+2d_physics/layer_5="EnemyHitbox"
+2d_physics/layer_6="EnemyAttacks"
+2d_physics/layer_7="Terrain"
+2d_physics/layer_8="TimeBubble"
 
 [physics]
 
@@ -116,6 +119,8 @@ recall={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.050980393, 0, 0.1254902, 1)

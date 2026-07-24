@@ -1,6 +1,8 @@
 class_name HealthComponent
 extends Node2D
 
+signal died
+
 @export var max_health: float = 100.0
 
 var health: float
@@ -15,10 +17,5 @@ func damage(amount: float):
 	health -= amount
 	
 	if health <= 0:
-		var parent = get_parent()
-		if parent is Player:
-			pass
-			# idk i can do something here maybe
-			# like a signal or something
-		else:
-			parent.queue_free()
+		died.emit()
+		#queue_free() # <- will have to happen in wtv function the died signal connects to

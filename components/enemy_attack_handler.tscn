@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpt3hafqkwu03"]
+
+[ext_resource type="Script" uid="uid://dq1nscbakmv4n" path="res://components/enemy_attack_handler.gd" id="1_3niwx"]
+
+[node name="EnemyAttackHandler" type="Node2D" unique_id=230497516]
+script = ExtResource("1_3niwx")

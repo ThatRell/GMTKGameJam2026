@@ -2,12 +2,13 @@ extends Node
 
 signal updated
 
-var a: int = 24
-var b: int = 24
-var c: int = 24
+var a: int = 6
+var b: int = 0
+var c: int = 0
 
 var clock_mode := Utility.ClockMode.HMS
-var is_paused: bool = true
+var is_paused: bool = false
+var is_finished: bool = false
 
 var _accumulator: float = 0.0
 
@@ -47,7 +48,7 @@ func toggle_clock_mode() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_paused:
+	if is_paused or is_finished:
 		return
 	
 	_accumulator += delta
@@ -64,6 +65,7 @@ func _process(delta: float) -> void:
 				subtract_from_slot(Utility.TimeSlot.C, 1)
 	
 	if a == 0 and b == 0 and c == 0:
+		is_finished = true
 		on_clock_finish()
 
 
@@ -155,7 +157,12 @@ func on_clock_finish() -> void:
 	is_paused = true
 	# death animation or something here
 	# await
-	# outer wilds reset
+	return_by_death()
+
+
+func return_by_death() -> void:
+	SceneLoader.entry_point = "Spawn"
+	SceneLoader.load_scene("Outside")
 
 
 func get_display_string() -> String:

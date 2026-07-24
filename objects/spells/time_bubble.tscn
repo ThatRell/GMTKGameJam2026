@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dx44d5k2eekbd"]
+
+[ext_resource type="Script" uid="uid://2g3fa8l88ph5" path="res://objects/spells/time_bubble.gd" id="1_pir56"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
+radius = 100.0
+
+[node name="TimeBubble" type="Area2D" unique_id=760602356]
+collision_layer = 128
+collision_mask = 44
+script = ExtResource("1_pir56")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1445482246]
+shape = SubResource("CircleShape2D_r8nve")

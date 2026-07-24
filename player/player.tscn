@@ -10,7 +10,7 @@
 size = Vector2(15, 10)
 
 [node name="Player" type="CharacterBody2D" unique_id=832450570 node_paths=PackedStringArray("health_component", "attack_manager") groups=["player"]]
-collision_mask = 48
+collision_mask = 64
 script = ExtResource("1_rkbax")
 health_component = NodePath("HealthComponent")
 attack_manager = NodePath("AttackManager")
@@ -26,7 +26,8 @@ shape = SubResource("RectangleShape2D_yi1kh")
 [node name="HealthComponent" parent="." unique_id=1198804758 instance=ExtResource("3_yw30f")]
 
 [node name="HitboxComponent" parent="." unique_id=1519969662 node_paths=PackedStringArray("health_component") instance=ExtResource("4_qjkh3")]
-collision_mask = 12
+collision_layer = 2
+collision_mask = 40
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1761860930]

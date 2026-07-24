@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bjvtncpmtk8hd"]
+
+[ext_resource type="Script" uid="uid://b4f68dpk044ct" path="res://main_rooms/outside.gd" id="1_1q2d0"]
+[ext_resource type="PackedScene" uid="uid://bcxsg4tkn63fb" path="res://objects/camera/smooth_camera.tscn" id="1_n71c8"]
+[ext_resource type="PackedScene" uid="uid://bodnisfjhbsp7" path="res://player/player.tscn" id="2_1q2d0"]
+[ext_resource type="PackedScene" uid="uid://kr6mqujx286q" path="res://components/player_bullet_pool.tscn" id="3_pwigt"]
+[ext_resource type="PackedScene" uid="uid://1mvowum0j5e1" path="res://components/enemy_bullet_pool.tscn" id="4_glup4"]
+[ext_resource type="PackedScene" uid="uid://deymwd1udfhs6" path="res://objects/exit.tscn" id="5_su767"]
+
+[node name="Outside" type="Node2D" unique_id=2040382762]
+script = ExtResource("1_1q2d0")
+
+[node name="SmoothCamera" parent="." unique_id=469740578 instance=ExtResource("1_n71c8")]
+
+[node name="Player" parent="." unique_id=832450570 instance=ExtResource("2_1q2d0")]
+
+[node name="PlayerBulletPool" parent="." unique_id=1262682872 instance=ExtResource("3_pwigt")]
+
+[node name="EnemyBulletPool" parent="." unique_id=2081719712 instance=ExtResource("4_glup4")]
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=220591137]
+
+[node name="Top" type="Marker2D" parent="." unique_id=1777496465]
+position = Vector2(0, -273)
+
+[node name="Exit" parent="." unique_id=169912942 instance=ExtResource("5_su767")]
+position = Vector2(0, -304)
+target_room = "Dungeon"
+entry_point = "Bottom"

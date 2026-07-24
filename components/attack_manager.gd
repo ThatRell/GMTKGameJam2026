@@ -9,11 +9,11 @@ var can_shoot: bool = true # as in if ur able to shoot
 var is_dashing: bool = false
 var freeze_cds: bool = false
 
-var shot_cooldown: float = 1.0 # depends on age + spell type
+var shot_cooldown: float = 0.25 # depends on age + spell type
 var shot_on_cd: bool = false # if u were able to shoot and u shot
 var shot_elapsed_time: float = 0.0
 
-var shot_windup: float = 1.0 # depends on age + spell type
+var shot_windup: float = 0.0 # depends on age + spell type
 var winding_up: bool = false
 var windup_elapsed_time: float = 0.0
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 	pass
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if freeze_cds:
 		return
 	
