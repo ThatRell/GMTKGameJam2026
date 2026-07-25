@@ -2,13 +2,16 @@ class_name EnemyAttackHandler
 extends Node2D
 
 const ENEMY_BULLET_SCENE: PackedScene = preload("uid://bwmyth58pm7h0")
+const RANDOM_DELAY_MIN: float = 0.0
+const RANDOM_DELAY_MAX: float = 0.2
 
 var enemy_stats: EnemyStats
 
 var can_attack: bool = true
 
-var attack_on_cd: bool = false
+var attack_on_cd: bool = true
 var elapsed_time: float = 0.0
+var random_delay_time: float = 0.0
 
 
 func _process(delta: float) -> void:
@@ -17,7 +20,7 @@ func _process(delta: float) -> void:
 	
 	if attack_on_cd:
 		elapsed_time += delta
-		if elapsed_time >= enemy_stats.attack_cooldown:
+		if elapsed_time >= enemy_stats.attack_cooldown + random_delay_time:
 			attack_on_cd = false
 		
 
@@ -30,9 +33,11 @@ func try_attack(attack_spawn_pos: Vector2, angle: float) -> void:
 
 func attack(attack_spawn_pos: Vector2, angle: float) -> void:
 	attack_on_cd = true
+	random_delay_time = randf_range(RANDOM_DELAY_MIN, RANDOM_DELAY_MAX)
 	elapsed_time = 0.0
 	
 	var new_bullet: BasicEnemyBullet = ENEMY_BULLET_SCENE.instantiate()
+	new_bullet.bullet_stats = enemy_stats.bullet_stats
 	new_bullet.global_position = attack_spawn_pos
 	new_bullet.global_rotation = angle
 	SignalBus.on_enemy_bullet_shot.emit(new_bullet)

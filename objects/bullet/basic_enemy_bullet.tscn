@@ -1,20 +1,64 @@
 [gd_scene format=3 uid="uid://bwmyth58pm7h0"]
 
-[ext_resource type="Texture2D" uid="uid://bi2abjdpelvv6" path="res://assets/prototype/circle-black-64.png" id="1_emt10"]
 [ext_resource type="Script" uid="uid://d23hystgm3e0w" path="res://objects/bullet/basic_enemy_bullet.gd" id="1_ov3bp"]
+[ext_resource type="Texture2D" uid="uid://c10jnrb4kx124" path="res://assets/edited_assets/projectiles_animated_enemy_edit.png" id="2_ov3bp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_emt10"]
 radius = 3.0
+
+[sub_resource type="Animation" id="Animation_ov3bp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_aducj"]
+resource_name = "enemy_bullet_flying"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 18]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_131pd"]
+_data = {
+&"RESET": SubResource("Animation_ov3bp"),
+&"enemy_bullet_flying": SubResource("Animation_aducj")
+}
 
 [node name="BasicEnemyBullet" type="Area2D" unique_id=2004962291]
 collision_layer = 32
 collision_mask = 66
 script = ExtResource("1_ov3bp")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=146801143]
-z_index = -1
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_emt10")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=632942662]
+texture = ExtResource("2_ov3bp")
+hframes = 8
+vframes = 6
+frame = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104744744]
+position = Vector2(2, 0)
 shape = SubResource("CircleShape2D_emt10")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1525696323]
+libraries/ = SubResource("AnimationLibrary_131pd")

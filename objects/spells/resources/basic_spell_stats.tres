@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpellStats" format=3 uid="uid://702t2ryjn0fu"]
+
+[ext_resource type="Script" uid="uid://dfaq42wfbi02o" path="res://objects/spells/spell_stats.gd" id="1_mrurh"]
+[ext_resource type="Resource" uid="uid://cmgxd4jhyh4jk" path="res://objects/bullet/resources/base_bullet_stats.tres" id="1_p0gxf"]
+
+[resource]
+script = ExtResource("1_mrurh")
+spell_name = "BasicSpell"
+shot_cooldown = 0.3
+shot_windup = 0.1
+bullet_stats = ExtResource("1_p0gxf")
+metadata/_custom_type_script = "uid://dfaq42wfbi02o"

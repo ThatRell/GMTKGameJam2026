@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BulletStats" format=3 uid="uid://cmgxd4jhyh4jk"]
+
+[ext_resource type="Script" uid="uid://dp56kfbpm20j6" path="res://objects/bullet/bullet_stats.gd" id="1_pfanq"]
+
+[resource]
+script = ExtResource("1_pfanq")
+speed = 130.0
+damage = 20.0
+metadata/_custom_type_script = "uid://dp56kfbpm20j6"

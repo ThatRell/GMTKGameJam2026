@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d3l5d5h431yp1" path="res://icon.svg" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://dk7xe7gccuo2c" path="res://enemy/enemy.gd" id="1_p200p"]
-[ext_resource type="Script" uid="uid://bvcp8ykmrcy3s" path="res://enemy/enemy_stats.gd" id="2_5ffra"]
+[ext_resource type="Resource" uid="uid://dwg7svbrq3kwx" path="res://enemy/resources/basic_enemy_stats.tres" id="2_78jik"]
 [ext_resource type="PackedScene" uid="uid://u5anwlsvtvpb" path="res://components/health_component.tscn" id="2_ppra6"]
 [ext_resource type="PackedScene" uid="uid://dd5mfi7joi5vc" path="res://components/hitbox_component.tscn" id="3_p200p"]
 [ext_resource type="PackedScene" uid="uid://crkflvae0t28i" path="res://states/state_machine.tscn" id="5_pmsee"]
@@ -11,25 +11,17 @@
 [ext_resource type="PackedScene" uid="uid://bpt3hafqkwu03" path="res://components/enemy_attack_handler.tscn" id="9_e355f"]
 [ext_resource type="Script" uid="uid://dec7wdjybgecq" path="res://states/enemy_states/enemy_attacking.gd" id="10_78jik"]
 
-[sub_resource type="Resource" id="Resource_y5vj3"]
-resource_local_to_scene = true
-script = ExtResource("2_5ffra")
-metadata/_custom_type_script = "uid://bvcp8ykmrcy3s"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enc88"]
 size = Vector2(13, 6.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_haq3y"]
 size = Vector2(16, 13)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
-radius = 500.0
-
 [node name="Enemy" type="CharacterBody2D" unique_id=911583991 node_paths=PackedStringArray("health_component", "attack_handler")]
 collision_layer = 8
 collision_mask = 72
 script = ExtResource("1_p200p")
-stats = SubResource("Resource_y5vj3")
+stats = ExtResource("2_78jik")
 health_component = NodePath("HealthComponent")
 attack_handler = NodePath("EnemyAttackHandler")
 
@@ -45,7 +37,7 @@ shape = SubResource("RectangleShape2D_enc88")
 
 [node name="HitboxComponent" parent="." unique_id=1519969662 node_paths=PackedStringArray("health_component") instance=ExtResource("3_p200p")]
 collision_layer = 16
-collision_mask = 4
+collision_mask = 516
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1586783396]
@@ -74,9 +66,3 @@ metadata/_custom_type_script = "uid://dhchdmsp3477b"
 script = ExtResource("10_78jik")
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://dec7wdjybgecq"
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1353281856]
-shape = SubResource("CircleShape2D_r8nve")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=2075189872]
-shape = SubResource("CircleShape2D_r8nve")

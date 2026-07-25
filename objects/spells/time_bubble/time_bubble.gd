@@ -31,6 +31,7 @@ func freeze_bodies() -> void:
 		if frozen_bodies.has(enemy):
 			continue
 		frozen_bodies[enemy] = true
+		enemy.health_component.died.connect(clear_invalid_enemies.bind(enemy))
 		enemy.frozen += 1
 
 
@@ -44,12 +45,23 @@ func freeze_areas() -> void:
 		if frozen_areas.has(bullet):
 			continue
 		frozen_areas[bullet] = true
+		bullet.destroyed.connect(clear_invalid_bullets.bind(bullet))
 		bullet.frozen += 1
 
 
 func unfreeze() -> void:
 	for enemy: Enemy in frozen_bodies:
-		enemy.frozen -= 1
+		if is_instance_valid(enemy):
+			enemy.frozen -= 1
 	
 	for bullet: BaseBullet in frozen_areas:
-		bullet.frozen -= 1
+		if is_instance_valid(bullet):
+			bullet.frozen -= 1
+
+
+func clear_invalid_bullets(bullet: BaseBullet):
+	frozen_areas.erase(bullet)
+
+
+func clear_invalid_enemies(enemy: Enemy):
+	frozen_bodies.erase(enemy)

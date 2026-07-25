@@ -9,4 +9,4 @@ func _ready() -> void:
 	if TimeManager.is_finished:
 		TimeManager.reset_clock()
 		TimeManager.is_finished = false
-		Global.game_data = GameData.new()
+		Global.game_data.reset_on_death()

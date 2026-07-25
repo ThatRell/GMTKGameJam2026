@@ -52,41 +52,63 @@ day 3:
 	- dungeon layout:
 		- locks/barriers:
 			- stream of bullets blocking your path requiring you to find the dash tome or timestop tome
-			- room where need to dash correctly to get through kill bricks (first room):
-				- similar to enter the gungeon fight
 			- need to stop a stream of bullets in order to make something open, for timestop tome
+			- room where need to dash correctly to get through kill bricks (first room) (DONE)
 			- switch puzzle with recall (DONE)
 		- arena rooms:
-			- each one stored in data
-			- if player crosses middle point spawn enemies
-			- entrance/exit doesn't open until all enemies are dead:
-				- set arena room to true to represent it was cleared
-			- check if player is ever outside of the current arena room, arena resets:
-				- spawned enemies wlil despawn
-				- doors will open
-				- player can activate it again
+			- each one stored in data (DONE)
+			- if player crosses middle point spawn enemies (DONE)
+			- entrance/exit doesn't open until all enemies are dead: (DONE)
+				- set arena room to true to represent it was cleared (DONE)
+			- check if player is ever outside of the current arena room, arena resets: (DONE)
+				- spawned enemies wlil despawn (DONE)
+				- player can activate it again (DONE)
+				- doors will open (DONE)
 	
-	- spell cycling (at least add a stronger/slower spell that could be like an unlock or something):
-		- 3 spells u can find:
-			- one that has fast attack rate but lower damage (good for bubble)
+	- make the floor trap room better
+	
+	- spell cycling (at least add a stronger/slower spell that could be like an unlock or something): (DONE)
+		- 2 spells u can find:
 			- one that has slower attack rate than normal but slightly more damage (you find near beginning)
 			- one that has slowest attack rate but biggest damage
+		- animate it
 	- UIs:
+		- use that one guy's pack
 		- hp bar
 		- cooldowns (auto attack, dash, recall, etc.)
-	- art (projectile sprites, enemy sprites)
-	- sound
+	- art:
+		- time bubble
+		- big projectile sprites
+		- enemy sprites
+	- sound:
+		- switch flip
+		- switch timer
+		- switch puzzle done
+		- player firing
+		- player getting hit
+		- bullet hitting wall?
+
 
 day 4:
 	- polish:
-		recall:
+		- health component:
+			- blinking animation when you take damage
+			- can't take damage for a few seconds (i frames)
+		- recall:
 			- save current player texture in the info
 			- before changing player position/loop through at spawn textures at that point
 			- when u get to the point, queue_free the texture
+		- dash:
+			- few frames after dash, u cant take damage
+			- maybe some blur visuals or something
 	- bug fix
 	- playtest
 	- submit early build
-	- more polish (ui/sound)
+	- more polish:
+		- sounds
+		- tilemap (use floors after placing all walls)
+		- ui
+		- art decorations
 	- splash art
 	- title art
 	- submit final build

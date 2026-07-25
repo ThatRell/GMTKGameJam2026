@@ -1,11 +1,57 @@
 [gd_scene format=3 uid="uid://uydvtwp4dli8"]
 
 [ext_resource type="Script" uid="uid://bh0c6dkuj2acu" path="res://objects/interactables/puzzle_stuff/timed_switch.gd" id="1_46uc0"]
+[ext_resource type="Texture2D" uid="uid://bpo48eoikqxv8" path="res://assets/edited_assets/animated_props_edit.png" id="2_kfx5k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
 
+[sub_resource type="Animation" id="Animation_kfx5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="Animation" id="Animation_36a4g"]
+resource_name = "flip_switch"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [17, 16, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0bui"]
+_data = {
+&"RESET": SubResource("Animation_kfx5k"),
+&"flip_switch": SubResource("Animation_36a4g")
+}
+
 [node name="TimedSwitch" type="Area2D" unique_id=1410174549 groups=["interactable"]]
 script = ExtResource("1_46uc0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1753865388]
+texture = ExtResource("2_kfx5k")
+hframes = 11
+vframes = 8
+frame = 17
+region_rect = Rect2(96, 16, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2068261303]
 shape = SubResource("CircleShape2D_r8nve")
@@ -13,3 +59,6 @@ shape = SubResource("CircleShape2D_r8nve")
 [node name="Timer" type="Timer" parent="." unique_id=170152081]
 wait_time = 10.0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1590654822]
+libraries/ = SubResource("AnimationLibrary_i0bui")

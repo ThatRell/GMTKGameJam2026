@@ -10,7 +10,7 @@ var strafe_time: float
 
 func randomize_strafe() -> void:
 	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	strafe_time = randf_range(1, 3)
+	strafe_time = randf_range(1, 2)
 
 
 func enter() -> void:

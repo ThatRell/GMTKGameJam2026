@@ -1,8 +1,9 @@
 class_name BaseBullet
 extends Area2D
 
-var speed: float = 170.0
-var damage: float = 10.0
+signal destroyed
+
+@export var bullet_stats: BulletStats
 var life_time: float = 20.0
 var frozen: int = 0
 
@@ -23,23 +24,27 @@ func _physics_process(delta: float) -> void:
 	if frozen > 0:
 		return
 	
-	global_position += Vector2.RIGHT.rotated(global_rotation) * speed * delta
+	global_position += Vector2.RIGHT.rotated(global_rotation) * bullet_stats.speed * delta
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent:
 		#print("damaged")
 		var hitbox: HitboxComponent = area
-		hitbox.damage(damage)
+		hitbox.damage(bullet_stats.damage)
 		
-		queue_free()
+		if not bullet_stats.can_pierce:
+			destroyed.emit()
+			queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
 	#print("hit a wall")
+	destroyed.emit()
 	queue_free()
 
 
 func _on_bullet_timeout() -> void:
 	#print("bullet memory freed")
+	destroyed.emit()
 	queue_free()

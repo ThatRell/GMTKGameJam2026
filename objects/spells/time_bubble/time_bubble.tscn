@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dx44d5k2eekbd"]
 
-[ext_resource type="Script" uid="uid://2g3fa8l88ph5" path="res://objects/spells/time_bubble.gd" id="1_pir56"]
+[ext_resource type="Script" uid="uid://2g3fa8l88ph5" path="res://objects/spells/time_bubble/time_bubble.gd" id="1_pir56"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
 radius = 50.0

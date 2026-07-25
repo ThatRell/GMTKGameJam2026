@@ -1,7 +1,18 @@
 class_name BasicBullet
 extends BaseBullet
 
-# need to find a way to prevent the player
-# from getting shot by their own bullets
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-# also when i make an enemy bullet, it'll also extend from basebullet
+
+func _ready() -> void:
+	super._ready()
+
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	
+	if frozen > 0:
+		if animation_player.is_playing():
+			animation_player.pause()
+	else:
+		animation_player.play("bullet_flying")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpellStats" format=3 uid="uid://1xry05d2fxf0"]
+
+[ext_resource type="Script" uid="uid://dfaq42wfbi02o" path="res://objects/spells/spell_stats.gd" id="1_4wvjv"]
+[ext_resource type="Resource" uid="uid://bi3ej8teml1j4" path="res://objects/bullet/resources/lightning_bullet_stats.tres" id="1_xv3wl"]
+
+[resource]
+script = ExtResource("1_4wvjv")
+spell_name = "PiercingBolt"
+shot_cooldown = 0.4
+shot_windup = 0.2
+bullet_stats = ExtResource("1_xv3wl")
+metadata/_custom_type_script = "uid://dfaq42wfbi02o"

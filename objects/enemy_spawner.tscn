@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://bc1yhbhj5vpfw" path="res://objects/enemy_spawner.gd" id="1_mp3ig"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_haq3y"]
+size = Vector2(340, 230)
+
 [node name="EnemySpawner" type="Area2D" unique_id=593411833]
 collision_layer = 256
 script = ExtResource("1_mp3ig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4114312]
+shape = SubResource("RectangleShape2D_haq3y")
+
+[node name="SpawnOrigin" type="Marker2D" parent="." unique_id=670051300]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

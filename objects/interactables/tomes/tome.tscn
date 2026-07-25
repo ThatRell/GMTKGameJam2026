@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cyth453qlty34"]
+
+[ext_resource type="Script" uid="uid://bgniykai70mkt" path="res://objects/interactables/tomes/tome.gd" id="1_k4enk"]
+[ext_resource type="Texture2D" uid="uid://cf7byfeois70r" path="res://assets/edited_assets/book.png" id="2_ii1ej"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
+
+[sub_resource type="Animation" id="Animation_ii1ej"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gt25r"]
+resource_name = "page_flip"
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pkvav"]
+_data = {
+&"RESET": SubResource("Animation_ii1ej"),
+&"page_flip": SubResource("Animation_gt25r")
+}
+
+[node name="Tome" type="Area2D" unique_id=1957010834]
+script = ExtResource("1_k4enk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1700681445]
+shape = SubResource("CircleShape2D_r8nve")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1419764893]
+texture = ExtResource("2_ii1ej")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=285174602]
+libraries/ = SubResource("AnimationLibrary_pkvav")
+autoplay = &"page_flip"

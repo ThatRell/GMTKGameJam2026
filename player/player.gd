@@ -103,7 +103,7 @@ func movement_input(delta: float) -> void:
 	velocity = lerp(velocity, input_vector * movement_speed, MOVEMENT_ACCELERATION * delta)
 	
 	if (
-			Input.is_action_just_pressed("dash") and Global.game_data.unlocked_time_dash 
+			Input.is_action_just_pressed("dash") and Global.game_data.unlocked_spells.get("TimeDash", false)
 			and can_dash and not dash_on_cd
 	):
 		if input_vector != Vector2.ZERO:
@@ -120,13 +120,13 @@ func non_movement_input(delta: float) -> void:
 		return
 	
 	if (
-			Input.is_action_just_pressed("recall") and Global.game_data.unlocked_time_recall
+			Input.is_action_just_pressed("recall") and Global.game_data.unlocked_spells.get("TimeRecall", false)
 			and position_hp_queue.size() == MAX_QUEUE_SIZE and can_recall and not recall_on_cd
 	):
 		recall()
 	
 	if (
-			Input.is_action_just_pressed("blank") and Global.game_data.unlocked_time_stop
+			Input.is_action_just_pressed("blank") and Global.game_data.unlocked_spells.get("TimeStop", false)
 			and can_blank and not blank_on_cd
 	):
 		blank()
@@ -138,6 +138,7 @@ func dash(direction: Vector2) -> void:
 	
 	dash_direction = direction
 	dash_timer = dash_duration
+	animation_player.speed_scale = 3.0
 	
 	health_component.can_take_damage = false
 	if TimeManager.clock_mode == Utility.ClockMode.MSM:
@@ -166,6 +167,7 @@ func dash_logic(delta: float) -> void:
 		# probably want to add some frames after the dash where u cant take damage
 		health_component.can_take_damage = true
 		attack_manager.is_dashing = false
+		animation_player.speed_scale = 1.0
 
 
 func recall() -> void:
@@ -227,6 +229,9 @@ func _on_spawn(spawn_position: Vector2, _spawn_direction: String) -> void:
 
 
 func on_player_died() -> void:
+	can_move = false
+	can_input = false
+	TimeManager.is_finished = true
 	print("your time was cut short.")
 	# death animation here or something
 	# await
