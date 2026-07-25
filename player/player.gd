@@ -3,10 +3,11 @@ extends CharacterBody2D
 
 const TIME_BUBBLE_SCENE: PackedScene = preload("uid://dx44d5k2eekbd")
 const MOVEMENT_ACCELERATION: float = 22.0
-const MAX_QUEUE_SIZE: int = 15
-const SECONDS_TO_GO_BACK: float = 5.0
+const MAX_QUEUE_SIZE: int = 20
+const SECONDS_TO_GO_BACK: float = 7.0
+const DASH_MULTIPLIER: float = 1.4
 
-@export var movement_speed: float = 400.0
+@export var movement_speed: float = 100.0
 @export var dash_duration: float = 0.1
 @export var dash_time_cost: int = 3
 @export var health_component: HealthComponent
@@ -18,23 +19,29 @@ var can_input: bool = true
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_timer: float = 0.0
 var dash_speed: float = 300.0
-#var can_dash: bool = true
+var can_dash: bool = true
+var dash_cooldown: float = 1.3
+var dash_on_cd: bool = false
+var dash_elapsed_time: float = 0.0
 
 var position_hp_queue: Array[PositionHPInfo] = []
 var queue_update_time: float = SECONDS_TO_GO_BACK / MAX_QUEUE_SIZE
 var queue_timer: float = 0.0
 var can_recall: bool = true
-var recall_cooldown: float = 15.0
+var recall_cooldown: float = 13.0
 var recall_on_cd: bool = false
 var recall_elapsed_time: float = 0.0
 
 var can_blank: bool = true
-var blank_cooldown: float = 20.0
+var blank_cooldown: float = 7.0
 var blank_on_cd: bool = false
 var blank_cd_elapsed_time: float = 0.0
 
 # for the dash process, recall, and time stop
 # make sure you check player has tomes unlocked
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
@@ -57,6 +64,11 @@ func _process(delta: float) -> void:
 		if blank_cd_elapsed_time >= blank_cooldown:
 			blank_on_cd = false
 	
+	if dash_on_cd:
+		dash_elapsed_time += delta
+		if dash_elapsed_time >= dash_cooldown:
+			dash_on_cd = false
+	
 	non_movement_input(delta)
 
 
@@ -74,6 +86,7 @@ func _physics_process(delta: float) -> void:
 		if position_hp_queue.size() > MAX_QUEUE_SIZE:
 			position_hp_queue.pop_front()
 	
+	handle_animations()
 	move_and_slide()
 
 
@@ -89,11 +102,17 @@ func movement_input(delta: float) -> void:
 	
 	velocity = lerp(velocity, input_vector * movement_speed, MOVEMENT_ACCELERATION * delta)
 	
-	if Input.is_action_just_pressed("dash"):
+	if (
+			Input.is_action_just_pressed("dash") and Global.game_data.unlocked_time_dash 
+			and can_dash and not dash_on_cd
+	):
 		if input_vector != Vector2.ZERO:
 			dash(input_vector) # based on player input
-		elif velocity.length() > 0.1:
+		elif velocity.length() > 0.15:
 			dash(velocity.normalized()) # else default on if there's velocity in a direction
+	
+	if velocity.length() <= 0.15:
+		velocity = Vector2.ZERO
 
 
 func non_movement_input(delta: float) -> void:
@@ -101,24 +120,22 @@ func non_movement_input(delta: float) -> void:
 		return
 	
 	if (
-			Input.is_action_just_pressed("recall") and position_hp_queue.size() == MAX_QUEUE_SIZE
-			and can_recall and not recall_on_cd
+			Input.is_action_just_pressed("recall") and Global.game_data.unlocked_time_recall
+			and position_hp_queue.size() == MAX_QUEUE_SIZE and can_recall and not recall_on_cd
 	):
 		recall()
 	
 	if (
-			Input.is_action_just_pressed("blank") and can_blank and not blank_on_cd
+			Input.is_action_just_pressed("blank") and Global.game_data.unlocked_time_stop
+			and can_blank and not blank_on_cd
 	):
 		blank()
-	
-	if Input.is_action_just_pressed("test"):
-		TimeManager.toggle_clock_mode()
-	
-	if Input.is_action_just_pressed("test2"):
-		TimeManager.is_paused = false
 
 
 func dash(direction: Vector2) -> void:
+	dash_on_cd = true
+	dash_elapsed_time = 0.0
+	
 	dash_direction = direction
 	dash_timer = dash_duration
 	
@@ -141,7 +158,7 @@ func dash_logic(delta: float) -> void:
 	#var current_speed = lerp(dash_speed, dash_speed * 0.5, dash_progress)
 	
 	# velocity should be max during and after the dash
-	velocity = dash_direction * movement_speed * dash_time_cost #dash_speed
+	velocity = dash_direction * movement_speed * dash_time_cost * DASH_MULTIPLIER
 	
 	dash_timer -= delta
 	if dash_timer <= 0.0:
@@ -192,9 +209,21 @@ func blank() -> void:
 	SignalBus.on_player_blanked.emit(new_bubble)
 
 
-func _on_spawn(spawn_position: Vector2, spawn_direction: String) -> void:
+func handle_animations() -> void:
+	if velocity:
+		animation_player.play("walk_right")
+	else:
+		animation_player.play("idle_right")
+	
+	var direction: Vector2 = get_global_mouse_position() - global_position
+	if direction.x >= 0:
+		sprite_2d.flip_h = false
+	else:
+		sprite_2d.flip_h = true
+
+
+func _on_spawn(spawn_position: Vector2, _spawn_direction: String) -> void:
 	global_position = spawn_position
-	# do some stuff with spawn direction here
 
 
 func on_player_died() -> void:

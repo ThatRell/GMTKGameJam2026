@@ -3,5 +3,5 @@ extends Node
 var game_data: GameData
 
 
-func ready() -> void:
+func _ready() -> void:
 	game_data = GameData.new()

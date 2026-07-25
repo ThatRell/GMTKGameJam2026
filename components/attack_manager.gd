@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	if freeze_cds:
 		return
 	
-	rotation_offset.global_rotation = lerp_angle(rotation_offset.global_rotation, (get_global_mouse_position() - global_position).angle(), 6.5 * delta)
+	rotation_offset.global_rotation = lerp_angle(rotation_offset.global_rotation, (get_global_mouse_position() - global_position).angle(), 50 * delta)
 	
 	if winding_up:
 		windup_elapsed_time += delta

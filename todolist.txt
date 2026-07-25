@@ -42,28 +42,57 @@ day 2:
 		- after time bubble ends, everything moves again (DONE)
 		- pause timemanger if player is in time bubble (not super important yet)
 	
-	- fail states
-	- room setup
-	- tilemap setup
-	- gameloop
-	
-	- UIs for cooldowns (auto attack, dash, recall, etc.)
+	- fail states (DONE)
+	- room setup (DONE-ISH)
+	- tilemap setup (DONE)
+	- gameloop (speed laugh)
 
 day 3:
-	- more rooms
-	- puzzles
-	- spell cycling
-	- art (player sprites, enemy sprites)
+	- player sprites (DONE)
+	- dungeon layout:
+		- locks/barriers:
+			- stream of bullets blocking your path requiring you to find the dash tome or timestop tome
+			- room where need to dash correctly to get through kill bricks (first room):
+				- similar to enter the gungeon fight
+			- need to stop a stream of bullets in order to make something open, for timestop tome
+			- switch puzzle with recall (DONE)
+		- arena rooms:
+			- each one stored in data
+			- if player crosses middle point spawn enemies
+			- entrance/exit doesn't open until all enemies are dead:
+				- set arena room to true to represent it was cleared
+			- check if player is ever outside of the current arena room, arena resets:
+				- spawned enemies wlil despawn
+				- doors will open
+				- player can activate it again
+	
+	- spell cycling (at least add a stronger/slower spell that could be like an unlock or something):
+		- 3 spells u can find:
+			- one that has fast attack rate but lower damage (good for bubble)
+			- one that has slower attack rate than normal but slightly more damage (you find near beginning)
+			- one that has slowest attack rate but biggest damage
+	- UIs:
+		- hp bar
+		- cooldowns (auto attack, dash, recall, etc.)
+	- art (projectile sprites, enemy sprites)
 	- sound
 
 day 4:
-	- splash art
-	- title art
-	- polish
+	- polish:
+		recall:
+			- save current player texture in the info
+			- before changing player position/loop through at spawn textures at that point
+			- when u get to the point, queue_free the texture
 	- bug fix
 	- playtest
 	- submit early build
-	- pray
+	- more polish (ui/sound)
+	- splash art
+	- title art
+	- submit final build
 
 important bugs:
-	- clock is counting down faster than a normal clock
+	- clock is counting down faster than a normal clock:
+		- rewrite clock script and just use a simple clock
+		- time pauses when ur outside, unpauses when ur in
+	- the attack manager rotation fucks up bullets if ur aiming too fast (bandaid fix was extrapolating lerp)

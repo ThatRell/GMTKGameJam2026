@@ -3,7 +3,7 @@ extends Area2D
 
 var frozen_bodies: Dictionary[Enemy, bool] = {}
 var frozen_areas: Dictionary[BaseBullet, bool] = {}
-var blank_duration: float = 5.0
+var blank_duration: float = 2.0
 var expired: bool = false
 
 

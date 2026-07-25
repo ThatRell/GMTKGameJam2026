@@ -7,5 +7,6 @@ func _ready() -> void:
 		TimeManager.toggle_clock_mode()
 	
 	if TimeManager.is_finished:
-		TimeManager.set_clock(6, 0, 0) # reset clock
+		TimeManager.reset_clock()
 		TimeManager.is_finished = false
+		Global.game_data = GameData.new()

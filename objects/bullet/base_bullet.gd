@@ -1,7 +1,7 @@
 class_name BaseBullet
 extends Area2D
 
-var speed: float = 250.0
+var speed: float = 170.0
 var damage: float = 10.0
 var life_time: float = 20.0
 var frozen: int = 0

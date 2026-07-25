@@ -16,11 +16,14 @@ resource_local_to_scene = true
 script = ExtResource("2_5ffra")
 metadata/_custom_type_script = "uid://bvcp8ykmrcy3s"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8nve"]
-size = Vector2(25, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enc88"]
+size = Vector2(13, 6.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_haq3y"]
-size = Vector2(32, 23)
+size = Vector2(16, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
+radius = 500.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=911583991 node_paths=PackedStringArray("health_component", "attack_handler")]
 collision_layer = 8
@@ -31,12 +34,12 @@ health_component = NodePath("HealthComponent")
 attack_handler = NodePath("EnemyAttackHandler")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1987885780]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_2mvqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1420631586]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_r8nve")
+position = Vector2(0, 3.25)
+shape = SubResource("RectangleShape2D_enc88")
 
 [node name="HealthComponent" parent="." unique_id=1198804758 instance=ExtResource("2_ppra6")]
 
@@ -46,7 +49,7 @@ collision_mask = 4
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1586783396]
-position = Vector2(0, 2)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_haq3y")
 
 [node name="AttackSpawnPos" type="Marker2D" parent="." unique_id=1542021707]
@@ -71,3 +74,9 @@ metadata/_custom_type_script = "uid://dhchdmsp3477b"
 script = ExtResource("10_78jik")
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://dec7wdjybgecq"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1353281856]
+shape = SubResource("CircleShape2D_r8nve")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=2075189872]
+shape = SubResource("CircleShape2D_r8nve")

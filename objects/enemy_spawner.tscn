@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://3eguqqk6jaur"]
+
+[ext_resource type="Script" uid="uid://bc1yhbhj5vpfw" path="res://objects/enemy_spawner.gd" id="1_mp3ig"]
+
+[node name="EnemySpawner" type="Area2D" unique_id=593411833]
+collision_layer = 256
+script = ExtResource("1_mp3ig")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

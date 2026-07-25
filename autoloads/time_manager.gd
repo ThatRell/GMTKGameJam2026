@@ -2,9 +2,13 @@ extends Node
 
 signal updated
 
-var a: int = 6
-var b: int = 0
-var c: int = 0
+const A_DEFAULT = 10
+const B_DEFAULT = 0
+const C_DEFAULT = 0
+
+var a: int = A_DEFAULT
+var b: int = B_DEFAULT
+var c: int = C_DEFAULT
 
 var clock_mode := Utility.ClockMode.HMS
 var is_paused: bool = false
@@ -13,10 +17,10 @@ var is_finished: bool = false
 var _accumulator: float = 0.0
 
 
-func set_clock(slot_a: int, slot_b: int, slot_c: int) -> void:
-	a = slot_a
-	b = slot_b
-	c = slot_c
+func reset_clock() -> void:
+	a = A_DEFAULT
+	b = B_DEFAULT
+	c = C_DEFAULT
 	clamp_clock()
 	
 	_accumulator = 0.0

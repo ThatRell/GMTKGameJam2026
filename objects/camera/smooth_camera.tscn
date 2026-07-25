@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b4sjenuvp4hf0" path="res://objects/camera/smooth_camera.gd" id="1_2rat7"]
 
 [node name="SmoothCamera" type="Camera2D" unique_id=469740578]
+zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("1_2rat7")

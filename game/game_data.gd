@@ -1,7 +1,7 @@
 class_name GameData
 extends Resource
 
-@export var current_room: StringName = &"" # should be uid
-@export var current_room_id: String = "" # should be room name
-@export var player_entry_point: String # where the player spawns in the current room
-@export var room_data: Dictionary[String, RoomData] = {}
+@export var unlocked_time_dash: bool = false
+@export var unlocked_time_stop: bool = false
+@export var unlocked_time_recall: bool = false
+@export var cleared_areas: Dictionary[String, bool] = {}

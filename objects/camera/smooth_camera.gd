@@ -1,7 +1,7 @@
 class_name SmoothCamera
 extends Camera2D
 
-const VIEWPORT_X_PERCENTAGE = 0.25
+const VIEWPORT_X_PERCENTAGE = 0.15
 const VIEWPORT_Y_PERCENTAGE = 0.15
 
 var desired_offset: Vector2
