@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dty8ilpjfcid5"]
 
-[ext_resource type="Texture2D" uid="uid://d3l5d5h431yp1" path="res://icon.svg" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://dk7xe7gccuo2c" path="res://enemy/enemy.gd" id="1_p200p"]
 [ext_resource type="Resource" uid="uid://dwg7svbrq3kwx" path="res://enemy/resources/basic_enemy_stats.tres" id="2_78jik"]
 [ext_resource type="PackedScene" uid="uid://u5anwlsvtvpb" path="res://components/health_component.tscn" id="2_ppra6"]
+[ext_resource type="Texture2D" uid="uid://da3kwy6q4arkv" path="res://assets/edited_assets/slime.png" id="3_78jik"]
 [ext_resource type="PackedScene" uid="uid://dd5mfi7joi5vc" path="res://components/hitbox_component.tscn" id="3_p200p"]
 [ext_resource type="PackedScene" uid="uid://crkflvae0t28i" path="res://states/state_machine.tscn" id="5_pmsee"]
 [ext_resource type="Script" uid="uid://c3trwf4je8arf" path="res://states/enemy_states/enemy_idle.gd" id="6_1wwld"]
@@ -12,25 +12,64 @@
 [ext_resource type="Script" uid="uid://dec7wdjybgecq" path="res://states/enemy_states/enemy_attacking.gd" id="10_78jik"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enc88"]
-size = Vector2(13, 6.5)
+size = Vector2(13, 4.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_haq3y"]
-size = Vector2(16, 13)
+size = Vector2(16, 11)
+
+[sub_resource type="Animation" id="Animation_o3pv7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xoplw"]
+resource_name = "slime"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yflr"]
+_data = {
+&"RESET": SubResource("Animation_o3pv7"),
+&"slime": SubResource("Animation_xoplw")
+}
 
 [node name="Enemy" type="CharacterBody2D" unique_id=911583991 node_paths=PackedStringArray("health_component", "attack_handler")]
 collision_layer = 8
-collision_mask = 72
+collision_mask = 1096
 script = ExtResource("1_p200p")
 stats = ExtResource("2_78jik")
 health_component = NodePath("HealthComponent")
 attack_handler = NodePath("EnemyAttackHandler")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1987885780]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_2mvqj")
+texture = ExtResource("3_78jik")
+hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1420631586]
-position = Vector2(0, 3.25)
+position = Vector2(0, 4.25)
 shape = SubResource("RectangleShape2D_enc88")
 
 [node name="HealthComponent" parent="." unique_id=1198804758 instance=ExtResource("2_ppra6")]
@@ -41,7 +80,7 @@ collision_mask = 516
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1586783396]
-position = Vector2(0, 0.5)
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_haq3y")
 
 [node name="AttackSpawnPos" type="Marker2D" parent="." unique_id=1542021707]
@@ -66,3 +105,7 @@ metadata/_custom_type_script = "uid://dhchdmsp3477b"
 script = ExtResource("10_78jik")
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://dec7wdjybgecq"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1521918508]
+libraries/ = SubResource("AnimationLibrary_6yflr")
+autoplay = &"slime"

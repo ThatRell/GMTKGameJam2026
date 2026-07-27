@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_cnwx7")
-speed = 150.0
+speed = 190.0
 damage = 35.0
 can_pierce = true
 metadata/_custom_type_script = "uid://dp56kfbpm20j6"

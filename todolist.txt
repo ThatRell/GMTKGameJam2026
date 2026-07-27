@@ -49,10 +49,11 @@ day 2:
 
 day 3:
 	- player sprites (DONE)
-	- dungeon layout:
+	- dungeon layout: (DONE?)
 		- locks/barriers:
-			- stream of bullets blocking your path requiring you to find the dash tome or timestop tome
-			- need to stop a stream of bullets in order to make something open, for timestop tome
+			- stream of arrows constatly hitting a campfire
+			- have to stop the stream of arrows and then shoot the campfire
+			- campfire has to stay lit for a certain duration (DONE)
 			- room where need to dash correctly to get through kill bricks (first room) (DONE)
 			- switch puzzle with recall (DONE)
 		- arena rooms:
@@ -65,19 +66,19 @@ day 3:
 				- player can activate it again (DONE)
 				- doors will open (DONE)
 	
-	- make the floor trap room better
-	
 	- spell cycling (at least add a stronger/slower spell that could be like an unlock or something): (DONE)
 		- 2 spells u can find:
-			- one that has slower attack rate than normal but slightly more damage (you find near beginning)
-			- one that has slowest attack rate but biggest damage
-		- animate it
+			- one that has slower attack rate than normal but slightly more damage (DONE)
+			- one that has slowest attack rate but biggest damage (IDK)
+	
 	- UIs:
-		- use that one guy's pack
+		- change hp to be small integers like 5 (DONE)
+		- when u get hit u lose a heart (DONE)
+		- if u are down at least 2 hearts, arena spawner will spawn a heart object after room clear (DONE)
 		- hp bar
 		- cooldowns (auto attack, dash, recall, etc.)
+		- spell cycling
 	- art:
-		- time bubble
 		- big projectile sprites
 		- enemy sprites
 	- sound:
@@ -95,23 +96,22 @@ day 4:
 			- blinking animation when you take damage
 			- can't take damage for a few seconds (i frames)
 		- recall:
-			- save current player texture in the info
+			- save current player frame in the info
 			- before changing player position/loop through at spawn textures at that point
 			- when u get to the point, queue_free the texture
 		- dash:
-			- few frames after dash, u cant take damage
 			- maybe some blur visuals or something
-	- bug fix
-	- playtest
-	- submit early build
-	- more polish:
-		- sounds
-		- tilemap (use floors after placing all walls)
-		- ui
-		- art decorations
 	- splash art
 	- title art
 	- submit final build
+
+EVERYTHING LEFT TO DO:
+GAME:
+- Final arena: boss
+- new heavy attack spell
+ART:
+- big projectile sprites
+- splash art
 
 important bugs:
 	- clock is counting down faster than a normal clock:

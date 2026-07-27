@@ -1,11 +1,13 @@
 @tool
 extends Area2D
 
+const arena_audio: AudioStream = preload("res://assets/sounds/arena.wav")
 const MAX_SPAWN_DISTANCE: float = 90.0
 const MIN_SPAWN_DISTANCE: float = 50.0
 const FAIL_SAFE_DISTANCE: float = 250.0
 const FAIL_SAFE_DISTANCE_SQUARED: float = FAIL_SAFE_DISTANCE * FAIL_SAFE_DISTANCE
 const PUSH_MULTIPLIER: float = 7.0
+const HEART_PICKUP: PackedScene = preload("uid://h06w5jml3dui")
 
 @export var spawner_id: String
 @export var enemy_container: Node2D
@@ -45,6 +47,11 @@ func _process(delta: float) -> void:
 		Global.game_data.cleared_areas[spawner_id] = true
 		is_cleared = true
 		open_arena()
+		
+		if player:
+			if player.health_component.max_health > player.health_component.health:
+				var heart: Interactable = HEART_PICKUP.instantiate()
+				add_child(heart)
 		
 		set_process(false)
 		set_deferred("monitoring", false)
@@ -129,6 +136,8 @@ func close_arena() -> void:
 	
 	for cell: Vector2i in cells:
 		tilemap.set_cell(cell, source, atlas_coords)
+	
+	AudioManager.play_sfx_2d(arena_audio, global_position)
 
 
 func open_arena() -> void:
@@ -137,6 +146,8 @@ func open_arena() -> void:
 	
 	for cell: Vector2i in cells:
 		tilemap.set_cell(cell, -1)
+	
+	AudioManager.play_sfx_2d(arena_audio, global_position)
 
 
 func _grab_cells_from_marker() -> void:

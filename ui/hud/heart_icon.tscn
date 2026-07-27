@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ckw6miw48djvd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b6oui"]
+load_path = "res://.godot/imported/hud_edit.png-f2262b878ea86a07d0d6befe0cdbb8df.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8nve"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_b6oui")
+region = Rect2(0, 0, 16, 16)
+
+[node name="HeartIcon" type="TextureRect" unique_id=319859782]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_r8nve")

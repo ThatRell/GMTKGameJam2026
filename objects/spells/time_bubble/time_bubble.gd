@@ -1,13 +1,18 @@
 class_name TimeBubble
 extends Area2D
 
-var frozen_bodies: Dictionary[Enemy, bool] = {}
-var frozen_areas: Dictionary[BaseBullet, bool] = {}
-var blank_duration: float = 2.0
+var frozen_bodies: Array[Enemy] = []
+var frozen_areas: Array[BaseBullet] = []
+var blank_duration: float = 2.5
 var expired: bool = false
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _physics_process(delta: float) -> void:
+	if not animation_player.is_playing():
+		animation_player.play("bubble_idle")
+	
 	if expired:
 		return
 	
@@ -17,6 +22,8 @@ func _physics_process(delta: float) -> void:
 	blank_duration -= delta
 	if blank_duration <= 0:
 		expired = true
+		animation_player.play_backwards("bubble_form")
+		await animation_player.animation_finished
 		unfreeze()
 		queue_free()
 
@@ -28,40 +35,32 @@ func freeze_bodies() -> void:
 			continue
 		 
 		var enemy: Enemy = body as Enemy
-		if frozen_bodies.has(enemy):
+		if enemy.is_queued_for_deletion() or enemy in frozen_bodies:
 			continue
-		frozen_bodies[enemy] = true
-		enemy.health_component.died.connect(clear_invalid_enemies.bind(enemy))
+		
+		frozen_bodies.append(enemy)
 		enemy.frozen += 1
 
 
 func freeze_areas() -> void:
 	var areas: Array[Area2D] = get_overlapping_areas()
 	for area: Area2D in areas:
-		if not (area is BaseBullet):
+		if not (area is BasicEnemyBullet):
 			continue
 		
-		var bullet: BaseBullet = area as BaseBullet
-		if frozen_areas.has(bullet):
+		var bullet: BasicEnemyBullet = area as BasicEnemyBullet
+		if bullet.is_queued_for_deletion() or bullet in frozen_areas:
 			continue
-		frozen_areas[bullet] = true
-		bullet.destroyed.connect(clear_invalid_bullets.bind(bullet))
+		
+		frozen_areas.append(bullet)
 		bullet.frozen += 1
 
 
 func unfreeze() -> void:
 	for enemy: Enemy in frozen_bodies:
-		if is_instance_valid(enemy):
+		if is_instance_valid(enemy) and not enemy.is_queued_for_deletion():
 			enemy.frozen -= 1
 	
-	for bullet: BaseBullet in frozen_areas:
-		if is_instance_valid(bullet):
+	for bullet: BasicEnemyBullet in frozen_areas:
+		if is_instance_valid(bullet) and not bullet.is_queued_for_deletion():
 			bullet.frozen -= 1
-
-
-func clear_invalid_bullets(bullet: BaseBullet):
-	frozen_areas.erase(bullet)
-
-
-func clear_invalid_enemies(enemy: Enemy):
-	frozen_bodies.erase(enemy)

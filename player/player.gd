@@ -1,16 +1,21 @@
 class_name Player
 extends CharacterBody2D
 
+const dash_noise: AudioStream = preload("res://assets/sounds/dash.wav")
+const bubble_noise: AudioStream = preload("res://assets/sounds/337133__cdonahueucsd__bubble_big.wav")
+const rewind_noise: AudioStream = preload("res://assets/sounds/162493__tasmanianpower__vinyl-rewind (1).wav")
 const TIME_BUBBLE_SCENE: PackedScene = preload("uid://dx44d5k2eekbd")
 const MOVEMENT_ACCELERATION: float = 22.0
 const MAX_QUEUE_SIZE: int = 20
 const SECONDS_TO_GO_BACK: float = 7.0
 const DASH_MULTIPLIER: float = 1.4
 
-@export var movement_speed: float = 100.0
+@export var movement_speed: float = 110.0
 @export var dash_duration: float = 0.1
 @export var dash_time_cost: int = 3
+@export var player_health: int = 5
 @export var health_component: HealthComponent
+@export var hitbox_component: HitboxComponent
 @export var attack_manager: AttackManager
 
 var can_move: bool = true
@@ -20,7 +25,7 @@ var dash_direction: Vector2 = Vector2.ZERO
 var dash_timer: float = 0.0
 var dash_speed: float = 300.0
 var can_dash: bool = true
-var dash_cooldown: float = 1.3
+var dash_cooldown: float = 0.8
 var dash_on_cd: bool = false
 var dash_elapsed_time: float = 0.0
 
@@ -33,7 +38,7 @@ var recall_on_cd: bool = false
 var recall_elapsed_time: float = 0.0
 
 var can_blank: bool = true
-var blank_cooldown: float = 7.0
+var blank_cooldown: float = 6.0
 var blank_on_cd: bool = false
 var blank_cd_elapsed_time: float = 0.0
 
@@ -42,14 +47,19 @@ var blank_cd_elapsed_time: float = 0.0
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var hurt_player: AudioStreamPlayer2D = $HurtPlayer
 
 
 func _ready() -> void:
 	SignalBus.on_trigger_player_spawn.connect(_on_spawn)
 	add_to_group("player")
 	
+	health_component.took_damage.connect(take_damage_sound)
 	health_component.died.connect(on_player_died)
+	health_component.set_max_health(player_health)
 	
+	SignalBus.reset_player_hp_bar.emit()
+	#GameUi.hud.
 	GameUi.visible = true
 
 
@@ -133,6 +143,7 @@ func non_movement_input(delta: float) -> void:
 
 
 func dash(direction: Vector2) -> void:
+	AudioManager.play_sfx(dash_noise)
 	dash_on_cd = true
 	dash_elapsed_time = 0.0
 	
@@ -141,6 +152,7 @@ func dash(direction: Vector2) -> void:
 	animation_player.speed_scale = 3.0
 	
 	health_component.can_take_damage = false
+	hitbox_component.can_get_hit = false
 	if TimeManager.clock_mode == Utility.ClockMode.MSM:
 		TimeManager.subtract_from_slot(Utility.TimeSlot.B, dash_time_cost)
 	else:
@@ -166,17 +178,20 @@ func dash_logic(delta: float) -> void:
 		dash_direction = Vector2.ZERO
 		# probably want to add some frames after the dash where u cant take damage
 		health_component.can_take_damage = true
+		hitbox_component.can_get_hit = true
 		attack_manager.is_dashing = false
 		animation_player.speed_scale = 1.0
 
 
 func recall() -> void:
+	AudioManager.play_sfx(rewind_noise)
 	recall_on_cd = true
 	recall_elapsed_time = 0.0
 	
 	can_move = false
 	can_blank = false
 	health_component.can_take_damage = false
+	hitbox_component.can_get_hit = false
 	attack_manager.freeze_cds = true
 	
 	var array: Array[PositionHPInfo] = position_hp_queue
@@ -199,6 +214,7 @@ func recall() -> void:
 	can_move = true
 	can_blank = true
 	health_component.can_take_damage = true
+	hitbox_component.can_get_hit = true
 	attack_manager.freeze_cds = false
 
 
@@ -209,6 +225,7 @@ func blank() -> void:
 	var new_bubble: TimeBubble = TIME_BUBBLE_SCENE.instantiate()
 	new_bubble.global_position = global_position
 	SignalBus.on_player_blanked.emit(new_bubble)
+	AudioManager.play_sfx(bubble_noise)
 
 
 func handle_animations() -> void:
@@ -231,8 +248,13 @@ func _on_spawn(spawn_position: Vector2, _spawn_direction: String) -> void:
 func on_player_died() -> void:
 	can_move = false
 	can_input = false
+	GameUi.visible = false
 	TimeManager.is_finished = true
 	print("your time was cut short.")
 	# death animation here or something
 	# await
 	TimeManager.return_by_death()
+
+
+func take_damage_sound() -> void:
+	hurt_player.play()

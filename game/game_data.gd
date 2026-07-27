@@ -6,6 +6,7 @@ extends Resource
 @export var spell_array: Array[SpellStats] = []
 
 @export var recall_puzzle_solved: bool = false
+@export var time_stop_puzzle_solved: bool = false
 
 
 func reset_on_death() -> void:
@@ -14,3 +15,9 @@ func reset_on_death() -> void:
 	spell_array = []
 	
 	recall_puzzle_solved = false
+	time_stop_puzzle_solved = false
+	
+	# TESTING
+	#unlocked_spells["TimeDash"] = true
+	#unlocked_spells["TimeStop"] = true
+	#unlocked_spells["TimeRecall"] = true

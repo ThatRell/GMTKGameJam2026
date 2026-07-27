@@ -1,6 +1,7 @@
 class_name EnemyAttackHandler
 extends Node2D
 
+const enemy_firing_audio: AudioStream = preload("res://assets/sounds/enemy_firing.wav")
 const ENEMY_BULLET_SCENE: PackedScene = preload("uid://bwmyth58pm7h0")
 const RANDOM_DELAY_MIN: float = 0.0
 const RANDOM_DELAY_MAX: float = 0.2
@@ -40,4 +41,6 @@ func attack(attack_spawn_pos: Vector2, angle: float) -> void:
 	new_bullet.bullet_stats = enemy_stats.bullet_stats
 	new_bullet.global_position = attack_spawn_pos
 	new_bullet.global_rotation = angle
+	global_position += Vector2.RIGHT.rotated(global_rotation) * 7 # slime fix?
 	SignalBus.on_enemy_bullet_shot.emit(new_bullet)
+	AudioManager.play_sfx_2d(enemy_firing_audio, attack_spawn_pos)

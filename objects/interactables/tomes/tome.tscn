@@ -44,7 +44,7 @@ _data = {
 &"page_flip": SubResource("Animation_gt25r")
 }
 
-[node name="Tome" type="Area2D" unique_id=1957010834]
+[node name="Tome" type="Area2D" unique_id=1957010834 groups=["interactable"]]
 script = ExtResource("1_k4enk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1700681445]

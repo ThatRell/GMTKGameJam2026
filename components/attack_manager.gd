@@ -1,7 +1,7 @@
 class_name AttackManager
 extends Node2D
 
-
+const firing_sound: AudioStream = preload("res://assets/sounds/firing_sound_player.wav")
 const BULLET_SCENES: Dictionary[String, PackedScene] = {
 	"BasicSpell": preload("uid://j73g7i2mwhrn"),
 	"PiercingBolt": preload("uid://mr8eg08htsm3"),
@@ -101,6 +101,7 @@ func shoot():
 	new_bullet.global_position = shoot_position.global_position
 	new_bullet.global_rotation = shoot_position.global_rotation
 	SignalBus.on_player_bullet_shot.emit(new_bullet)
+	AudioManager.play_sfx(firing_sound)
 
 
 func cancel_shoot() -> void:
@@ -115,3 +116,4 @@ func set_cd_and_windup() -> void:
 	var current_spell = Global.game_data.spell_array[current_spell_index]
 	shot_cooldown = current_spell.shot_cooldown
 	shot_windup = current_spell.shot_windup
+	SignalBus.on_current_spell_updated.emit(current_spell.spell_name)

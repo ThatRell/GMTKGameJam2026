@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://ol3tp3vgvrk0"]
+
+[ext_resource type="Script" uid="uid://bxpexmh0qhcwn" path="res://main_rooms/game_over.gd" id="1_5vokt"]
+[ext_resource type="LabelSettings" uid="uid://dgkf0847tt670" path="res://ui/new_label_settings.tres" id="1_83j73"]
+[ext_resource type="FontFile" uid="uid://ds44oj0lm5w82" path="res://assets/RasterForgeRegular-JpBgm.ttf" id="2_5vokt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1suj5"]
+font = ExtResource("2_5vokt")
+font_size = 100
+font_color = Color(0.654902, 0.6, 0.8, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4oh3o"]
+font = ExtResource("2_5vokt")
+font_size = 100
+font_color = Color(0.45882353, 0.27450982, 0.44313726, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kshvq"]
+font = ExtResource("2_5vokt")
+font_size = 50
+font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hutg"]
+font = ExtResource("2_5vokt")
+font_size = 40
+font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+shadow_size = 0
+
+[node name="GameOver" type="Node2D" unique_id=474733142]
+script = ExtResource("1_5vokt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1992560128]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1684358916]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=1001940258]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.050980393, 0, 0.1254902, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=1589758212]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -44.0
+offset_right = 187.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "playing"
+label_settings = ExtResource("1_83j73")
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=635570402]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 229.0
+offset_right = 744.0
+offset_bottom = 317.0
+text = "THANKS"
+label_settings = SubResource("LabelSettings_1suj5")
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=1768544442]
+layout_mode = 0
+offset_left = 759.0
+offset_top = 227.0
+offset_right = 1084.0
+offset_bottom = 315.0
+text = "FOR"
+label_settings = SubResource("LabelSettings_4oh3o")
+
+[node name="Label4" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=1434820060]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = 156.0
+offset_right = 175.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY AGAIN"
+label_settings = SubResource("LabelSettings_kshvq")
+
+[node name="Label5" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=1009952935]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 590.0
+offset_right = 749.0
+offset_bottom = 635.0
+text = "QUIT"
+label_settings = SubResource("LabelSettings_2hutg")
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Control" unique_id=1020445574]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = 154.0
+offset_right = 190.0
+offset_bottom = 204.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control" unique_id=323740804]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 225.0
+offset_right = 100.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

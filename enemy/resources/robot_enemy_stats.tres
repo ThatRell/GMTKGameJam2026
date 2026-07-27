@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bxioa167qvdju"]
+
+[ext_resource type="Resource" uid="uid://db53cghen5tgv" path="res://objects/bullet/resources/enemy_base_bullet_stats.tres" id="1_041io"]
+[ext_resource type="Script" uid="uid://bvcp8ykmrcy3s" path="res://enemy/enemy_stats.gd" id="1_bb3nd"]
+
+[resource]
+script = ExtResource("1_bb3nd")
+max_health = 175.0
+move_speed = 65.0
+attack_radius = 85.0
+attack_cooldown = 0.4
+bullet_stats = ExtResource("1_041io")
+metadata/_custom_type_script = "uid://bvcp8ykmrcy3s"

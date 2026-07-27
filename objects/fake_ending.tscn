@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://k206yv0hqeh3"]
+
+[ext_resource type="Script" uid="uid://dnkwvftxevgdf" path="res://objects/fake_ending.gd" id="1_2o15h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8nve"]
+size = Vector2(400, 400)
+
+[node name="FakeEnding" type="Area2D" unique_id=835635796]
+collision_layer = 64
+script = ExtResource("1_2o15h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1772152733]
+shape = SubResource("RectangleShape2D_r8nve")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

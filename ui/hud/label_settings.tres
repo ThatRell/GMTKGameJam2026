@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d0p7kecrdxk30"]
+
+[ext_resource type="FontFile" uid="uid://ceeqvlc82bhg0" path="res://assets/MegamaxJonathanToo-YqOq2.ttf" id="1_pv58k"]
+
+[resource]
+font = ExtResource("1_pv58k")

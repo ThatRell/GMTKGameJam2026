@@ -2,7 +2,7 @@ extends Node
 
 signal updated
 
-const A_DEFAULT = 10
+const A_DEFAULT = 15
 const B_DEFAULT = 0
 const C_DEFAULT = 0
 
@@ -170,18 +170,9 @@ func return_by_death() -> void:
 
 
 func get_display_string() -> String:
-	match clock_mode:
-		Utility.ClockMode.HMS:
-			return "ClockMode: HMS\n%02d:%02d:%02d" % [
-				a,
-				b,
-				c,
-			]
-		Utility.ClockMode.MSM:
-			return "ClockMode: MSM\n%02d:%02d:%02d" % [
-				a,
-				b,
-				c,
-			]
-	
+	return "%02d:%02d:%02d" % [
+		a,
+		b,
+		c,
+	]
 	return ""

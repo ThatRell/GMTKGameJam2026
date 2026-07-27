@@ -1,4 +1,6 @@
-extends Label
+extends Control
+
+@onready var label: Label = %Label
 
 
 func _ready() -> void:
@@ -7,4 +9,4 @@ func _ready() -> void:
 
 
 func update_display() -> void:
-	text = TimeManager.get_display_string()
+	label.text = TimeManager.get_display_string()

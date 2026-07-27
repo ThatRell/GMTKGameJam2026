@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://djuiaq3wp6ps6"]
+
+[ext_resource type="Script" uid="uid://gtgo1a15h4cj" path="res://ui/hud/dialogue_container.gd" id="1_asc50"]
+[ext_resource type="LabelSettings" uid="uid://d0p7kecrdxk30" path="res://ui/hud/label_settings.tres" id="2_e3g1q"]
+
+[node name="DialogueContainer" type="Control" unique_id=2088764084]
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 250.0
+script = ExtResource("1_asc50")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=615404717]
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect" unique_id=627690486]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer" unique_id=185390611]
+layout_mode = 2
+color = Color(0.050980393, 0, 0.1254902, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/ColorRect" unique_id=76057147]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Explanations" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer" unique_id=1368449578]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(476, 23)
+layout_mode = 2
+label_settings = ExtResource("2_e3g1q")
+autowrap_mode = 2
+
+[node name="SpaceToClose" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer" unique_id=400177440]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Press Space or E to Close"
+label_settings = ExtResource("2_e3g1q")
+
+[node name="HideTimer" type="Timer" parent="." unique_id=713305171]
+one_shot = true
+
+[node name="Delay" type="Timer" parent="." unique_id=1615602146]
+one_shot = true

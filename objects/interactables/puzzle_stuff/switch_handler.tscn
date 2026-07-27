@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://b4w4roptx600e" path="res://objects/interactables/puzzle_stuff/switch_handler.gd" id="1_fmwa2"]
 
-[node name="SwitchHandler" type="Node" unique_id=363375012]
+[node name="SwitchHandler" type="Node2D" unique_id=1520277151]
 script = ExtResource("1_fmwa2")

@@ -7,10 +7,12 @@ const MAIN_SCENES: Dictionary[String, StringName] = {
 	"TestRoom": "uid://d2f6ud5xxium0",
 	"Outside": "uid://bjvtncpmtk8hd",
 	"Dungeon": "uid://b3n7ro0gs8pdk",
+	"GameOver": "uid://ol3tp3vgvrk0",
 }
 
 var loading_screen: PackedScene = preload("uid://77ubabpor8gs")
 var entry_point: String = "" # for generic room script to move player to a place
+var current_scene: String
 
 
 func load_scene(scene_name: String) -> void:
@@ -22,6 +24,8 @@ func load_scene(scene_name: String) -> void:
 	load_finished.connect(new_load_screen._on_load_finished)
 	
 	await new_load_screen.loading_screen_ready
+	
+	current_scene = scene_name
 	
 	var scene: PackedScene = load(scene_uid)
 	get_tree().change_scene_to_packed(scene)

@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" uid="uid://d0ep5ad4empgg" path="res://ui/game_ui.gd" id="1_dcmab"]
 [ext_resource type="PackedScene" uid="uid://bi0vc0ymjcfsp" path="res://ui/hud/display_clock.tscn" id="2_w46tp"]
+[ext_resource type="PackedScene" uid="uid://dpe87x5usxyr0" path="res://ui/pause_menu.tscn" id="3_7hrjk"]
+[ext_resource type="PackedScene" uid="uid://drtd322ncsi3w" path="res://ui/hud/spell_cycle.tscn" id="3_pylni"]
+[ext_resource type="PackedScene" uid="uid://bsoya47q3wab2" path="res://ui/hud/hp_bar.tscn" id="4_3vkek"]
+[ext_resource type="PackedScene" uid="uid://djuiaq3wp6ps6" path="res://ui/hud/dialogue_container.tscn" id="5_xh48a"]
 
-[node name="GameUI" type="CanvasLayer" unique_id=1822230257 node_paths=PackedStringArray("hud", "pause_menu", "debug_menu")]
+[node name="GameUI" type="CanvasLayer" unique_id=1822230257 node_paths=PackedStringArray("hud")]
 visible = false
 script = ExtResource("1_dcmab")
 hud = NodePath("HUD")
-pause_menu = NodePath("PauseMenu")
-debug_menu = NodePath("DebugMenu")
 
 [node name="HUD" type="Control" parent="." unique_id=208000243]
 layout_mode = 3
@@ -19,22 +21,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DisplayClock" parent="HUD" unique_id=1624328689 instance=ExtResource("2_w46tp")]
+[node name="HPBar" parent="HUD" unique_id=992215802 instance=ExtResource("4_3vkek")]
 layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 80.0
+offset_bottom = 16.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(5, 5)
 
-[node name="PauseMenu" type="Control" parent="." unique_id=2079826007]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="DialogueContainer" parent="HUD" unique_id=691727376 instance=ExtResource("5_xh48a")]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
 grow_horizontal = 2
-grow_vertical = 2
 
-[node name="DebugMenu" type="Control" parent="." unique_id=632191979]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="DisplayClock" parent="HUD" unique_id=1550647995 instance=ExtResource("2_w46tp")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
+
+[node name="SpellCycle" parent="HUD" unique_id=897140975 instance=ExtResource("3_pylni")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PauseMenu" parent="." unique_id=436130911 instance=ExtResource("3_7hrjk")]

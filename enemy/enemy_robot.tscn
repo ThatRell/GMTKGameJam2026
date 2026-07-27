@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://cbdj708rxow4e"]
+
+[ext_resource type="Script" uid="uid://dk7xe7gccuo2c" path="res://enemy/enemy.gd" id="1_41ffn"]
+[ext_resource type="Texture2D" uid="uid://b03xybeubjj6k" path="res://assets/edited_assets/robot_thing.png" id="2_a37ql"]
+[ext_resource type="Resource" uid="uid://bxioa167qvdju" path="res://enemy/resources/robot_enemy_stats.tres" id="2_hk0xb"]
+[ext_resource type="PackedScene" uid="uid://u5anwlsvtvpb" path="res://components/health_component.tscn" id="2_yq8ay"]
+[ext_resource type="PackedScene" uid="uid://dd5mfi7joi5vc" path="res://components/hitbox_component.tscn" id="4_yq8ay"]
+[ext_resource type="PackedScene" uid="uid://bpt3hafqkwu03" path="res://components/enemy_attack_handler.tscn" id="5_mdfve"]
+[ext_resource type="PackedScene" uid="uid://crkflvae0t28i" path="res://states/state_machine.tscn" id="6_a5le2"]
+[ext_resource type="Script" uid="uid://dec7wdjybgecq" path="res://states/enemy_states/enemy_attacking.gd" id="7_jcd6k"]
+[ext_resource type="Script" uid="uid://dhchdmsp3477b" path="res://states/enemy_states/enemy_follow.gd" id="8_hk0xb"]
+[ext_resource type="Script" uid="uid://c3trwf4je8arf" path="res://states/enemy_states/enemy_idle.gd" id="9_png04"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_haq3y"]
+size = Vector2(8, 7.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yq8ay"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_jcd6k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hk0xb"]
+resource_name = "robot"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_png04"]
+_data = {
+&"RESET": SubResource("Animation_jcd6k"),
+&"robot": SubResource("Animation_hk0xb")
+}
+
+[node name="EnemyRobot" type="CharacterBody2D" unique_id=1604136956 node_paths=PackedStringArray("health_component", "attack_handler")]
+collision_layer = 8
+collision_mask = 1096
+script = ExtResource("1_41ffn")
+stats = ExtResource("2_hk0xb")
+health_component = NodePath("HealthComponent")
+attack_handler = NodePath("EnemyAttackHandler")
+metadata/_custom_type_script = "uid://dk7xe7gccuo2c"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=846126419]
+texture = ExtResource("2_a37ql")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=40570000]
+position = Vector2(0, 4.75)
+shape = SubResource("RectangleShape2D_haq3y")
+
+[node name="HealthComponent" parent="." unique_id=1198804758 instance=ExtResource("2_yq8ay")]
+max_health = 200.0
+
+[node name="HitboxComponent" parent="." unique_id=1519969662 node_paths=PackedStringArray("health_component") instance=ExtResource("4_yq8ay")]
+collision_layer = 16
+collision_mask = 516
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1690774311]
+shape = SubResource("CircleShape2D_yq8ay")
+
+[node name="AttackSpawnPos" type="Marker2D" parent="." unique_id=284112089]
+unique_name_in_owner = true
+
+[node name="EnemyAttackHandler" parent="." unique_id=230497516 instance=ExtResource("5_mdfve")]
+
+[node name="StateMachine" parent="." unique_id=619734796 node_paths=PackedStringArray("initial_state") instance=ExtResource("6_a5le2")]
+initial_state = NodePath("EnemyIdle")
+
+[node name="EnemyAttacking" type="Node" parent="StateMachine" unique_id=2049762597 node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_jcd6k")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://dec7wdjybgecq"
+
+[node name="EnemyFollow" type="Node" parent="StateMachine" unique_id=670060044 node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_hk0xb")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://dhchdmsp3477b"
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" unique_id=1084989451 node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_png04")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://c3trwf4je8arf"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=18367955]
+libraries/ = SubResource("AnimationLibrary_png04")
+autoplay = &"robot"

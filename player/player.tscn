@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dd5mfi7joi5vc" path="res://components/hitbox_component.tscn" id="4_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://dwhas3i4omaok" path="res://components/attack_manager.tscn" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://sfm33h6f3fy3" path="res://components/interact_manager.tscn" id="6_g6k8r"]
+[ext_resource type="AudioStream" uid="uid://xtnmlk8peurg" path="res://assets/sounds/01_Hurt_v1.wav" id="7_boad6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yi1kh"]
 size = Vector2(6, 5)
@@ -162,10 +163,11 @@ _data = {
 &"walk_up": SubResource("Animation_qjkh3")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=832450570 node_paths=PackedStringArray("health_component", "attack_manager") groups=["player"]]
-collision_mask = 320
+[node name="Player" type="CharacterBody2D" unique_id=832450570 node_paths=PackedStringArray("health_component", "hitbox_component", "attack_manager") groups=["player"]]
+collision_mask = 1344
 script = ExtResource("1_rkbax")
 health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
 attack_manager = NodePath("AttackManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=349320746]
@@ -195,3 +197,7 @@ visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1670004032]
 libraries/ = SubResource("AnimationLibrary_rgyib")
+
+[node name="HurtPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1305254250]
+stream = ExtResource("7_boad6")
+volume_db = -10.391

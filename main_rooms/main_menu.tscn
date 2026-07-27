@@ -1,6 +1,32 @@
 [gd_scene format=3 uid="uid://pxed7d8fqi64"]
 
 [ext_resource type="Script" uid="uid://yvdcj6ylhb5p" path="res://main_rooms/main_menu.gd" id="1_yi1kh"]
+[ext_resource type="LabelSettings" uid="uid://dgkf0847tt670" path="res://ui/new_label_settings.tres" id="2_p5hdh"]
+[ext_resource type="FontFile" uid="uid://ds44oj0lm5w82" path="res://assets/RasterForgeRegular-JpBgm.ttf" id="3_0wlfd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4cqi"]
+font = ExtResource("3_0wlfd")
+font_size = 100
+font_color = Color(0.654902, 0.6, 0.8, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0p0r"]
+font = ExtResource("3_0wlfd")
+font_size = 100
+font_color = Color(0.45882353, 0.27450982, 0.44313726, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5hdh"]
+font = ExtResource("3_0wlfd")
+font_size = 50
+font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wlfd"]
+font = ExtResource("3_0wlfd")
+font_size = 40
+font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+shadow_size = 0
 
 [node name="MainMenu" type="Node2D" unique_id=371475454]
 script = ExtResource("1_yi1kh")
@@ -8,17 +34,112 @@ initial_scene = &"Outside"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1722611418]
 
-[node name="PlayButton" type="Button" parent="CanvasLayer" unique_id=1072927255]
-unique_name_in_owner = true
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=331716375]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=903805583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.050980393, 0, 0.1254902, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=971351101]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -187.5
+offset_top = -44.0
+offset_right = 187.5
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Start Game"
+text = "MANIC"
+label_settings = ExtResource("2_p5hdh")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=1524125473]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 225.0
+offset_right = 616.0
+offset_bottom = 313.0
+text = "TIME"
+label_settings = SubResource("LabelSettings_u4cqi")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=330267285]
+layout_mode = 0
+offset_left = 631.0
+offset_top = 226.0
+offset_right = 956.0
+offset_bottom = 314.0
+text = "WARP"
+label_settings = SubResource("LabelSettings_s0p0r")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label4" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=104598148]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 515.0
+offset_right = 721.0
+offset_bottom = 560.0
+text = "PLAY"
+label_settings = SubResource("LabelSettings_p5hdh")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label5" type="Label" parent="CanvasLayer/Control/ColorRect" unique_id=2107385611]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 590.0
+offset_right = 749.0
+offset_bottom = 635.0
+text = "QUIT"
+label_settings = SubResource("LabelSettings_0wlfd")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Control" unique_id=1072927255]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 155.0
+offset_right = 100.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control" unique_id=1483383224]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 225.0
+offset_right = 100.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_use_anchors_ = true

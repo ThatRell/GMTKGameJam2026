@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://dwg7svbrq3kwx"]
 
-[ext_resource type="Resource" uid="uid://cmgxd4jhyh4jk" path="res://objects/bullet/resources/base_bullet_stats.tres" id="1_pk5l2"]
+[ext_resource type="Resource" uid="uid://db53cghen5tgv" path="res://objects/bullet/resources/enemy_base_bullet_stats.tres" id="1_pk5l2"]
 [ext_resource type="Script" uid="uid://bvcp8ykmrcy3s" path="res://enemy/enemy_stats.gd" id="2_tgvmh"]
 
 [resource]
 script = ExtResource("2_tgvmh")
+attack_radius = 120.0
 bullet_stats = ExtResource("1_pk5l2")
 metadata/_custom_type_script = "uid://bvcp8ykmrcy3s"

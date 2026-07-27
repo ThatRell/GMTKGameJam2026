@@ -1,9 +1,67 @@
 [gd_scene format=3 uid="uid://dx44d5k2eekbd"]
 
 [ext_resource type="Script" uid="uid://2g3fa8l88ph5" path="res://objects/spells/time_bubble/time_bubble.gd" id="1_pir56"]
+[ext_resource type="Texture2D" uid="uid://omim8yfcu3dc" path="res://assets/edited_assets/bubble_sprites.png" id="2_15dfq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8nve"]
-radius = 50.0
+radius = 65.0
+
+[sub_resource type="Animation" id="Animation_15dfq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0aarj"]
+resource_name = "bubble_form"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_vm68r"]
+resource_name = "bubble_idle"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vm68r"]
+_data = {
+&"RESET": SubResource("Animation_15dfq"),
+&"bubble_form": SubResource("Animation_0aarj"),
+&"bubble_idle": SubResource("Animation_vm68r")
+}
 
 [node name="TimeBubble" type="Area2D" unique_id=760602356]
 collision_layer = 128
@@ -12,3 +70,13 @@ script = ExtResource("1_pir56")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1445482246]
 shape = SubResource("CircleShape2D_r8nve")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1973811598]
+z_index = 3
+texture = ExtResource("2_15dfq")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1737201509]
+libraries/ = SubResource("AnimationLibrary_vm68r")
+autoplay = &"bubble_form"

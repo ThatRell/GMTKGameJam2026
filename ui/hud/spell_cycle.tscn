@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://drtd322ncsi3w"]
+
+[ext_resource type="LabelSettings" uid="uid://d0p7kecrdxk30" path="res://ui/hud/label_settings.tres" id="1_hdqda"]
+[ext_resource type="Script" uid="uid://be842hpw6uc0g" path="res://ui/hud/spell_cycle.gd" id="2_pncnn"]
+
+[node name="SpellCycle" type="Control" unique_id=897140975]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_pncnn")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1086885688]
+custom_minimum_size = Vector2(512, 80)
+layout_mode = 0
+offset_left = -512.0
+offset_top = -80.0
+color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect" unique_id=754031023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer" unique_id=580836182]
+layout_mode = 2
+color = Color(0.050980393, 0, 0.1254902, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/ColorRect" unique_id=910183374]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer" unique_id=489638205]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 17)
+layout_mode = 2
+label_settings = ExtResource("1_hdqda")
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="." unique_id=1191063609]
+wait_time = 3.0
+one_shot = true

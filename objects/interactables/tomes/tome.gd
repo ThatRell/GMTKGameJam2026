@@ -1,10 +1,13 @@
 extends Interactable
 
+const pick_up_audio: AudioStream = preload("res://assets/sounds/pickuptome.wav")
+
 const SPELL_STATS: Dictionary[String, SpellStats] = {
 	"PiercingBolt": preload("uid://1xry05d2fxf0"),
 }
 
 @export var spell_name: String
+@export_multiline var explanation_text: String
 
 
 func _ready() -> void:
@@ -25,4 +28,6 @@ func interact() -> void:
 	if spell:
 		Global.game_data.spell_array.append(spell)
 	
+	AudioManager.play_sfx(pick_up_audio)
+	SignalBus.on_text_trigger.emit(explanation_text)
 	queue_free()
