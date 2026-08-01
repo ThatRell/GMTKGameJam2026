@@ -26,9 +26,14 @@ func on_menu_pressed() -> void:
 	visible = false
 	Engine.time_scale = 1.0
 	SceneLoader.load_scene("MainMenu")
+	TimeManager.is_finished = true
 
 
 func on_reset_pressed() -> void:
 	visible = false
 	Engine.time_scale = 1.0
+	TimeManager.reset_clock()
+	TimeManager.is_finished = false
+	TimeManager.is_paused = false
+	Global.game_data.reset_on_death()
 	get_tree().reload_current_scene()

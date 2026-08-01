@@ -40,14 +40,15 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	
 	if area is BasicBullet:
-		timer.start()
-		moving_sprite.visible = true
-		AudioManager.play_sfx_2d(flame_audio, global_position)
+		if timer.is_stopped():
+			timer.start()
+			moving_sprite.visible = true
+			AudioManager.play_sfx_2d(flame_audio, global_position)
 	elif area is BasicEnemyBullet:
 		if not timer.is_stopped():
 			AudioManager.play_sfx_2d(go_out_audio, global_position)
-		timer.stop()
-		moving_sprite.visible = false
+			timer.stop()
+			moving_sprite.visible = false
 
 
 func on_timeout() -> void:

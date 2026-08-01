@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _on_button_pressed() -> void:
 	AudioManager.play_sfx(menu_click_audio)
+	TimeManager.is_finished = true
 	SceneLoader.entry_point = "Spawn"
 	SceneLoader.load_scene("Outside")
 

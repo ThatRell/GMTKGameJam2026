@@ -216,6 +216,8 @@ func recall() -> void:
 	health_component.can_take_damage = true
 	hitbox_component.can_get_hit = true
 	attack_manager.freeze_cds = false
+	
+	SignalBus.reset_player_hp_bar.emit()
 
 
 func blank() -> void:
