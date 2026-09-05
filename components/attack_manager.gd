@@ -32,6 +32,10 @@ func _ready() -> void:
 	set_cd_and_windup()
 
 
+func _physics_process(delta: float) -> void:
+	rotation_offset.global_rotation = lerp_angle(rotation_offset.global_rotation, (get_global_mouse_position() - global_position).angle(), 60 * delta)
+
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_released("mouse_wheel_up"):
 		if winding_up:
@@ -53,8 +57,6 @@ func _process(delta: float) -> void:
 	
 	if freeze_cds:
 		return
-	
-	rotation_offset.global_rotation = lerp_angle(rotation_offset.global_rotation, (get_global_mouse_position() - global_position).angle(), 60 * delta)
 	
 	if winding_up:
 		windup_elapsed_time += delta
